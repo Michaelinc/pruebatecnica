@@ -1,0 +1,75 @@
+<p-toast></p-toast>
+
+<h1 style="text-align:center;color:gray"> SEMI-CRUD USUARIOS </h1>
+
+<div class="container">
+    <p-table [responsive]="true" [columns]="cols" [value]="users" [paginator]="true" [rows]="15">
+        <ng-template pTemplate="caption">
+            Lista de usuarios
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary" let-rowData>
+            <div style="text-align:left">
+                <button type="button" pButton icon="pi pi-plus" (click)="showDialogToAdd()" label="Agregar"></button>
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog header="Detalles" [(visible)]="activateDialog" [focusOnShow]="false" [responsive]="true" showEffect="fade"
+    [modal]="true" [closable]="false">
+
+    <form [formGroup]="this.formGroup">
+
+        <div class="p-grid">
+
+            <div class="p-col">
+                <span class="p-float-label">
+                    <input autocomplete='false'
+                        [ngClass]="{ 'is-invalid': this.formGroup.get('name')?.errors && this.formGroup.get('name')?.touched}"
+                        type="text" formControlName="name" pInputText>
+                    <label>Nombre</label>
+                </span>
+            </div>
+
+            <div class="p-col">
+                <span class="p-float-label">
+                    <input autocomplete='false'
+                        [ngClass]="{ 'is-invalid': this.formGroup.get('doc')?.errors && this.formGroup.get('doc')?.touched}"
+                        type="text" formControlName="doc" pInputText>
+                    <label>Documento</label>
+                </span>
+            </div>
+
+            <div class="p-col">
+                <span class="p-float-label">
+                    <input autocomplete='false'
+                        [ngClass]="{ 'is-invalid': this.formGroup.get('profile')?.errors && this.formGroup.get('profile')?.touched}"
+                        type="text" formControlName="profile" pInputText>
+                    <label>Perfil</label>
+                </span>
+            </div>
+            <div class="p-col" style="text-align:center;">
+                <button [disabled]="this.formGroup.invalid" pButton pRipple type="button" icon="pi pi-send"
+                    (click)="onSave()" class="p-button-rounded"></button>
+                <button style="margin-left: 10px;" pButton pRipple type="button" icon="pi pi-times" (click)="cancel()"
+                    class="p-button-rounded p-button-danger"></button>
+
+            </div>
+        </div>
+    </form>
+</p-dialog>

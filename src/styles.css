@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+.container {
+    margin: 2%;
+    padding: 1%;
+}
+
+.p-col {
+    margin-top:25px;
+}
+
+.p-grid {
+    margin-top:10%;
+}
+
+.is-invalid {
+    color: #dc3545;
+    border-radius: 1px red;
+}
